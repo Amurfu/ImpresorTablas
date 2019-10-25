@@ -1,6 +1,6 @@
+//� 2019 Luis Esparza, All rights reserved
 package com.ttracasa.impresor;
 
-//� 2019 Luis Esparza, All rights reserved
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,15 +12,19 @@ import javax.swing.JTable;
  */
 public class ImpresorTabla {
     
-    
-    public void imprimirJTable(String nombreArchivo, JTable table) throws IOException {
-        FileWriter escritor = new FileWriter(nombreArchivo);
-        PrintWriter escritorFormato = new PrintWriter(escritor);
-        escritorFormato.println(encabezadosTabla(table));
-        for (int row = 0 ; row < table.getRowCount() ; row++) 
-            escritorFormato.println(filaCommaSeparated(table, row));
-        escritorFormato.close(); 
-        escritor.close();
+    /**
+     * 
+     * @param nombreArchivo
+     * @param jTable
+     * @throws IOException
+     */
+    public void imprimirJTable(String nombreArchivo, JTable jTable) throws IOException {
+        try (   FileWriter escritor = new FileWriter(nombreArchivo); 
+                PrintWriter escritorFormato = new PrintWriter(escritor); ) {
+            escritorFormato.println(encabezadosTabla(jTable));
+            for (int row = 0 ; row < jTable.getRowCount() ; row++)
+                escritorFormato.println(filaCommaSeparated(jTable, row));
+        }
     }
     
     private String encabezadosTabla(JTable table){
