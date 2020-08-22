@@ -30,14 +30,14 @@ public class ImpresorTabla {
     private String encabezadosTabla(JTable table){
         String string = "";
         for (int i = 0 ; i < table.getColumnCount() ; i++)
-            string += String.format("%s,", table.getColumnName(i));
+            string += String.format("\"%s\",", table.getColumnName(i));
         return cropLast(string);
     }
 
     private String filaCommaSeparated(JTable table, int row){
         String string = "";
         for (int column = 0 ; column < table.getColumnCount() ; column++)
-            string += String.format("%s,", table.getValueAt(row, column));
+            string += String.format("\"%s\",", table.getValueAt(row, column));
         return cropLast(string);
     }
 
